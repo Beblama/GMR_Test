@@ -6,7 +6,6 @@ Date: March 6, 2021
 
 
 Notes:
-
 The table will instantiate columns and rows with Text fields.
 The table will adjust and add extra rows to fit any extra "Team Member".
 
