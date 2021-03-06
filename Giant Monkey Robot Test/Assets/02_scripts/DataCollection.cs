@@ -1,6 +1,6 @@
 ﻿using System;
 
-//Holds all the information from the JSON
+//Holds JSON main information
 [Serializable]
 public class DataCollection
 {

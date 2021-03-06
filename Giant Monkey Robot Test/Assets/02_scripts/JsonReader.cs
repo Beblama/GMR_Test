@@ -21,12 +21,13 @@ public class JsonReader : MonoBehaviour
     //String to modify the json file path if ever needed.
     [SerializeField]
     string jsonFilePath;
+    [SerializeField]
+    string[] AllVariables;
 
-    //List that contains all the columns created for the table.
+    //private variables to hold information about columns, json and serializable data
     List<GameObject> AllColumns = new List<GameObject>();
-
-    //string used to save the JSON
     string json;
+    DataCollection dataCollection;
 
     //Calls function LoadData
     private void Start()
@@ -46,7 +47,7 @@ public class JsonReader : MonoBehaviour
     void LoadData(string JSON)
     {
         //Information is deserialized into dataCollection
-        DataCollection dataCollection = JsonUtility.FromJson<DataCollection>(JSON);       
+        dataCollection = JsonUtility.FromJson<DataCollection>(JSON);       
 
         //A single column is created and added to the AllColumns list
         GameObject columnToUse = Instantiate(tableColumnPrefab, columnLayout);
@@ -65,6 +66,13 @@ public class JsonReader : MonoBehaviour
             AllColumns.Add(newColumn);
         }
 
+        //Set texts on screen
+        AssignTexts();
+    }
+    
+    //Assigns the proper string to each of the the texts on the table
+    void AssignTexts()
+    {
         //Title text assigned 
         tableTitle.text = dataCollection.Title;
 
@@ -73,8 +81,9 @@ public class JsonReader : MonoBehaviour
         {
             AllColumns[i].transform.GetChild(0).GetComponent<Text>().text = dataCollection.ColumnHeaders[i];
         }
-
+        
         //Table information text assigned
+        //EACH COLUMN TEXT IS HARDCODED HERE, KEEP IN MIND IF YOU WISH TO ADD MORE COLUMNS/CATEGORIES
         for (int e = 1; e < dataCollection.Data.Length + 1; e++)
         {
             AllColumns[0].transform.GetChild(e).GetComponent<Text>().text = dataCollection.Data[e - 1].ID;
@@ -83,14 +92,25 @@ public class JsonReader : MonoBehaviour
             AllColumns[3].transform.GetChild(e).GetComponent<Text>().text = dataCollection.Data[e - 1].Nickname;
         }
     }
-    
+
     //Checks if Json has changed, reloads data if it has
     void CheckCurrentJson()
     {
         string newJson = File.ReadAllText(Application.streamingAssetsPath + jsonFilePath);
         if (newJson != json)
         {
-            LoadData(newJson);
+            DeleteThenLoad(newJson);
         }
+    }
+
+    //Deletes previous columns, clears column list and calls function LoadData
+    void DeleteThenLoad(string newJson)
+    {
+        foreach (GameObject gO in AllColumns)
+        {
+            Destroy(gO);
+        }
+        AllColumns.Clear();
+        LoadData(newJson);
     }
 }
