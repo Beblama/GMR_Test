@@ -13,25 +13,31 @@
 	"ID" : "001",
 	"Name" : "John Doe",
 	"Role" : "Engineer",
-	"Nickname" : "KillerJo",
+	"Nickname" : "KillerJo"
 	},
 	{
 	"ID" : "023",
 	"Name" : "Claire Dawn",
 	"Role" : "Engineer",
-	"Nickname" : "Claw",
+	"Nickname" : "Claw"
 	},
 	{
 	"ID" : "012",
 	"Name" : "Paul Beef",
 	"Role" : "Designer",
-	"Nickname" : "BeefyPaul",
+	"Nickname" : "BeefyPaul"
 	},
 	{
 	"ID" : "056",
 	"Name" : "Sally Sue",
 	"Role" : "Artist",
-	"Nickname" : "Sue5555",
+	"Nickname" : "Sue5555"
 	},
+	{
+	"ID" : "085",
+	"Name" : "Big Ben",
+	"Role" : "Nobody Knows",
+	"Nickname" : "Blasagna"
+	}
 	]
 }
